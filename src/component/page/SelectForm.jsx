@@ -6,68 +6,191 @@ import useVacation from '../list/useVacation';
 import { getTileClassName, getMonthRange, groupConsecutiveDates } from '../list/holidayUtils';
 import holidays from '../list/HolidayList';
 import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+import { FaCalendarCheck, FaUmbrellaBeach } from 'react-icons/fa';
+import BackButton from '../list/BackButton';
 
-//다음 화면에 넘겨줘야 할 상태변수 : 총 사용한 휴가일수, 연속되어 정해진 쉬는날들 (공휴일+휴가사용) => totalDays(App.js에 존재), 
+// 스타일 컴포넌트 정의
+
+const Container = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+`;
+
+const InfoPanel = styled.div`
+  flex: 1;
+  position: sticky;
+  top: 20px;
+  align-self: flex-start;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
+  min-width: 265px;
+  max-width: 300px;
+`;
+
+const CalendarGrid = styled.div`
+  flex: 2;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  max-width : 100px;
+   
+  @media (max-width: 1200px) {
+    grid-template-columns: repeat(2, 1fr); /* 한 줄에 2개의 열 */
+  }
+
+  @media (max-width: 800px) {
+    grid-template-columns: repeat(1, 1fr); /* 한 줄에 1개의 열 */
+  }
+`;
+
+const CalendarHeader = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffecb3; /* 배경색 */
+  color: #333; /* 텍스트 색상 */
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 10px; /* 달력과 간격 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+  max-width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+`;
+
+const CalendarContainer = styled.div`
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-height: 400px;
+  background-color: #D6F0FF;
+`;
+
+const StyledButton = styled.button`
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #4D9ED8;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+
+  transition: transform 0.3s, box-shadow 0.3s;
+
+  &:hover {
+    background-color: #5BB8E6;
+    transform: scale(1.02);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  }
+`;
+
+const DateBlock = styled.div`
+  display: inline-block;
+  background-color: #ffecb3;
+  color: #333;
+  padding: 8px 12px;
+  margin: 5px;
+  border-radius: 12px;
+  font-size: 14px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+`;
+
+const DateList = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+`;
+
+const VacationDaysBlock = styled.div`
+  display: inline-block;
+  background-color: #ffecb3; /* 밝은 노란색 배경 */
+  color: #333;
+  padding: 8px 12px;
+  margin: 5px 0;
+  border-radius: 12px;
+  font-size: 14px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-weight: bold;
+`;
+
 const SelectForm = ({ dateRange, totalDays }) => {
-  //dateRange값을 받아서 시작 날짜 세팅
-  const [startDate, setStartDate] = useState(null);
-  //dateRange값을 받아서 종료 날짜 세팅
-  const [endDate, setEndDate] = useState(null);
+  const [startDate] = useState(null);
+  const [endDate] = useState(null);
   const { vacationDaysLeft, selectedDays, handleDateClick } = useVacation(totalDays);
-  const [monthRange, setMonthRange] = useState([]);
   const navigate = useNavigate();
+  const [monthRange, setMonthRange] = useState([]);
 
   // dateRange 값이 변경될 때마다 시작 날짜와 종료 날짜 업데이트
   useEffect(() => {
     if (dateRange?.[0] && dateRange?.[1]) {
-      setStartDate(dateRange[0]);
-      setEndDate(dateRange[1]);
-
       const months = getMonthRange({ start: dateRange[0], end: dateRange[1] });
-      setMonthRange(months);  // monthRange 업데이트
+      setMonthRange(months); // monthRange 업데이트
     }
   }, [dateRange]);
 
-  // 휴가 선택 가능 날짜 범위 설정 (시작 날짜 입력X => 현재 날짜로 설정)
+  // 휴가 선택 가능 날짜 범위 설정
   const minDate = startDate ? new Date(startDate) : new Date();
   const maxDate = endDate ? new Date(endDate) : null;
 
   return (
-    <div>
-      <h2>휴가 설정</h2>
-      <p>남은 휴가 일수: {vacationDaysLeft}</p>
+    <Container>
+      <header className="header-container">
+        {/* BackButton 컴포넌트 추가 */}
+        <BackButton />
+        <h1>휴가 정보를 입력하세요</h1>
+      </header>
+      {/* 정보 패널 */}
+      <InfoPanel>
+        <h2><FaUmbrellaBeach style={{ marginRight: '8px', color: '#007bff' }} />휴가 정보</h2>
+        <h2 className='leftdays'><FaCalendarCheck style={{ marginRight: '5px', color: '#f39c12' }} />남은 휴가 일수 :　
+        <VacationDaysBlock>{vacationDaysLeft}일</VacationDaysBlock></h2>
+        <h2 className='selecteddays'>선택된 휴가 날짜:</h2>
+        <DateList>
+          {groupConsecutiveDates(selectedDays, holidays).map((group, idx) => (
+            <DateBlock key={idx}>{`${group[0]} ~ ${group[group.length - 1]}`}</DateBlock>
+          ))}
+        </DateList>
+        <StyledButton
+          onClick={() => navigate('/result', { state: { selectedDays, holidays } })}
+        >
+          결과 보러 가기
+        </StyledButton>
+      </InfoPanel>
 
-      {monthRange.map((monthDate, index) => (
-        <div key={index} className="calendar-container">
-          <h3>{monthDate.toLocaleString('ko-KR', { year: 'numeric', month: 'long' })}</h3>
-          <Calendar
-            locale="ko-KR"
-            calendarType="hebrew"
-            minDate={minDate}
-            maxDate={maxDate}
-            tileClassName={(props) => getTileClassName({ ...props, selectedDays, holidays })}
-            onClickDay={(date) => handleDateClick(date.toLocaleDateString('ko-KR'))}
-            value={monthDate}
-          />
-        </div>
-      ))}
-
-      <h3>선택된 휴가 날짜:</h3>
-      <ul>
-        {groupConsecutiveDates(selectedDays, holidays).map((group, idx) => (
-          <li key={idx}>{`${group[0]} ~ ${group[group.length - 1]}`}</li>
+      {/* 달력 그리드 */}
+      <CalendarGrid>
+        {monthRange.map((monthDate, index) => (
+          <CalendarContainer key={index}>
+            <CalendarHeader>
+              {monthDate.toLocaleString('ko-KR', { year: 'numeric', month: 'long' })}
+            </CalendarHeader>
+            <Calendar
+              locale="ko-KR"
+              calendarType="hebrew"
+              minDate={minDate}
+              maxDate={maxDate}
+              tileClassName={(props) => getTileClassName({ ...props, selectedDays, holidays })}
+              onClickDay={(date) => handleDateClick(date.toLocaleDateString('ko-KR'))}
+              value={monthDate}
+              tileDisabled={({ date, view }) => view === 'month' && date.getMonth() !== monthDate.getMonth()}
+              showNavigation={false}
+            />
+          </CalendarContainer>
         ))}
-      </ul>
-      <button
-        className="result-button"
-        onClick={() => 
-        navigate('/result', { state: { selectedDays, holidays } })
-        }
-      >
-        결과 보러 가기
-      </button>
-    </div>
+      </CalendarGrid>
+    </Container>
   );
 };
 
 export default SelectForm;
+

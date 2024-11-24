@@ -10,15 +10,49 @@
   color: red !important; /* 주말 및 공휴일 - 빨간색 */
 }
 .react-calendar__tile {
+  font-size: 14px;
   color: black;
   background-color: white;
 }
-.react-calendar__tile--active {
-  background-color: whitesmoke !important;  /* 이유는 모르겠는데 자꾸 매월 1일이 파란색으로 떠서 따로 지정 */
-}
-.react-calendar__tile:hover {
-  background-color: whitesmoke;
+.react-calendar__tile--active:hover {
+  background-color: #e6e6e6 !important;  /* 이유는 모르겠는데 자꾸 매월 1일이 파란색으로 떠서 따로 지정 */
 }
 .react-calendar__tile--current:hover {
-  background-color: whitesmoke;
+  background-color: whitesmoke !important;
+}
+.react-calendar__tile--active:enabled:focus {
+  background: #e6e6e6;
+}
+.react-calendar {
+  border-radius: 8px; /* 전체 달력의 테두리를 둥글게 */
+  overflow: hidden; /* 둥근 모서리를 잘리게 만듦 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-color: skyblue;
+}
+.react-calendar__month-view__weekdays__weekday abbr {
+  text-decoration: none; /* 점 제거 */
+  cursor: default; /* 선택 불가능하게 설정 */
+}
+
+.react-calendar__month-view__weekdays__weekday abbr[title] {
+  border: none; /* title 속성에 의해 나타나는 스타일 제거 */
+}
+
+.header-container {
+  width: 100%; /* 전체 폭 차지 */
+  border-bottom: 1px solid #ccc; /* 아래 선 추가 */
+  padding: 30px;
+}
+
+.header-container h1 {
+  font-size: 40px;
+  text-align: center; /* 텍스트 가운데 정렬 */
+}
+
+.leftdays {
+  font-size: 18px;
+}
+
+.selecteddays {
+  font-size: 16px;
 }
