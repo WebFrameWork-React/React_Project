@@ -1,0 +1,24 @@
+.calendar-container {
+  margin: 20px 0;
+}
+
+.selected {
+  color: blue !important;; /* 선택된 날짜 - 파란색 */
+}
+
+.holiday {
+  color: red !important; /* 주말 및 공휴일 - 빨간색 */
+}
+.react-calendar__tile {
+  color: black;
+  background-color: white;
+}
+.react-calendar__tile--active {
+  background-color: whitesmoke !important;  /* 이유는 모르겠는데 자꾸 매월 1일이 파란색으로 떠서 따로 지정 */
+}
+.react-calendar__tile:hover {
+  background-color: whitesmoke;
+}
+.react-calendar__tile--current:hover {
+  background-color: whitesmoke;
+}
