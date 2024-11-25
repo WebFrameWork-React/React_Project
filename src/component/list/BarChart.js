@@ -5,7 +5,7 @@ import 'chart.js/auto';
 const BarChart = ({ data }) => {
     const options = {
         responsive: true,
-        maintainAspectRatio: false,
+        maintainAspectRatio: false, // 비율 유지하지 않음
         scales: {
             y: {
                 beginAtZero: true,
@@ -18,7 +18,7 @@ const BarChart = ({ data }) => {
         plugins: {
             legend: {
                 display: true,
-                position: 'top',
+                position: 'top', // 범례 상단 위치
             },
         },
         animation: {
@@ -27,7 +27,11 @@ const BarChart = ({ data }) => {
         },
     };
 
-    return <Bar data={data} options={options} />;
+    return (
+        <div style={{ width: '100%', height: '100%' }}>
+            <Bar data={data} options={options} />
+        </div>
+    );
 };
 
 export default BarChart;

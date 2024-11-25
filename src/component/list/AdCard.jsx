@@ -74,7 +74,6 @@ function AdCard({ imageSrc, description, recommendation, onClickUrl, month }) {
             <div style={styles.textContainer}>
                 <p style={styles.description}>{description}</p>
                 <p style={styles.recommendation}>{recommendation}</p>
-                {month && <p style={styles.month}>추천 월: {month}월</p>}
             </div>
         </a>
     );

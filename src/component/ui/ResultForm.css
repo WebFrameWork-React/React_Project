@@ -1,22 +1,38 @@
 /* 전체 레이아웃 설정 */
 .app-container {
     display: flex;
-    height: 100vh;
+    height: 100vh; /* 전체 화면 높이 */
+    overflow: hidden; /* 불필요한 스크롤 방지 */
 }
 
 /* 왼쪽 패널 스타일 */
 .left-panel {
-    width: 60%;
-    height: 100%;
+    width: 60%; /* 좌측 패널 너비 */
+    height: 100%; /* 좌측 패널 높이 */
     padding: 20px;
-
+    overflow-y: auto; /* 스크롤 가능 */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     box-sizing: border-box;
-    padding-bottom: 20px; /* 아래쪽 여백 */
-
 }
+
+/* 오른쪽 패널 스타일 */
+.right-panel {
+    width: 40%; /* 우측 패널 너비 */
+    padding: 20px;
+    height: auto;
+    position: sticky; /* 특정 위치에 고정 */
+    top: 80px; /* 헤더 아래에 고정 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    box-sizing: border-box;
+    background-color: #fff; /* 배경색 */
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1); /* 좌측 그림자 */
+}
+
 
 .vacation-date {
     margin-bottom: auto; /* VacationDate를 위쪽으로 밀어내는 여백 설정 */
@@ -25,27 +41,26 @@
   .ad-card {
     align-self: stretch; /* AdCard가 너비를 꽉 채우도록 설정 */
     margin-top: auto; /* AdCard를 하단에 고정 */
-  }
-
- 
-/* 오른쪽 패널 스타일 */
-.right-panel {
-    width: 40%;
-    height: 100%;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
-}
+  } 
 
 /* 차트 컨테이너 스타일 */
 .chart-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    max-width: 600px;
-    margin: 20px auto;
+    display: block; /* 기본 블록으로 설정 */
+    text-align: center; /* 컨테이너 내부 내용 가운데 정렬 */
+    width: 100%; /* 너비를 부모에 맞춤 */
+    max-width: 800px; /* 최대 너비 유지 */
+    margin: 30px auto; /* 중앙 정렬 */
+    background-color: #fff; /* 배경색 */
+    padding: 20px; /* 내부 여백 */
+    border-radius: 8px; /* 모서리 둥글게 */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 */
+}
+
+.chart-title {
+    display: block; /* 블록 형태로 차트 위에 배치 */
+    text-align: center; /* 가운데 정렬 */
+    font-weight: bold; /* 굵은 글씨 */
+    font-size: 18px; /* 글씨 크기 */
+    margin-bottom: 10px; /* 아래 여백 */
+    width: 100%; /* 부모 요소의 너비를 모두 사용 */
 }
