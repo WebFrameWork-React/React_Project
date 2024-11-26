@@ -130,7 +130,21 @@ const SelectForm = ({ dateRange, totalDays }) => {
   const navigate = useNavigate();
   const [monthRange, setMonthRange] = useState([]);
 
-  // dateRange 값이 변경될 때마다 시작 날짜와 종료 날짜 업데이트
+  // 선택된 날짜 상태를 localStorage에서 복원
+  useEffect(() => {
+    const savedSelectedDays = JSON.parse(localStorage.getItem('selectedDays')) || [];
+    const savedHolidays = JSON.parse(localStorage.getItem('holidays')) || [];
+
+    // 로컬 스토리지의 데이터를 useVacation 상태에 반영
+    if (savedSelectedDays.length > 0) {
+      selectedDays.splice(0, selectedDays.length, ...savedSelectedDays); // 기존 배열 초기화 후 복원
+    }
+    if (savedHolidays.length > 0) {
+      holidays.splice(0, holidays.length, ...savedHolidays); // 공휴일 복원
+    }
+  }, []);
+
+  // dateRange 값이 변경될 때마다 월 범위 업데이트
   useEffect(() => {
     if (dateRange?.[0] && dateRange?.[1]) {
       const months = getMonthRange({ start: dateRange[0], end: dateRange[1] });
@@ -138,9 +152,15 @@ const SelectForm = ({ dateRange, totalDays }) => {
     }
   }, [dateRange]);
 
-  // 휴가 선택 가능 날짜 범위 설정
   const minDate = startDate ? new Date(startDate) : new Date();
   const maxDate = endDate ? new Date(endDate) : null;
+
+  // 선택된 날짜를 클릭할 때 localStorage에 저장
+  const handleDayClick = (date) => {
+    handleDateClick(date.toLocaleDateString('ko-KR'));
+    const updatedDays = [...selectedDays, date.toLocaleDateString('ko-KR')];
+    localStorage.setItem('selectedDays', JSON.stringify(updatedDays));
+  };
 
   return (
     <Container>
@@ -151,10 +171,16 @@ const SelectForm = ({ dateRange, totalDays }) => {
       </header>
       {/* 정보 패널 */}
       <InfoPanel>
-        <h2><FaUmbrellaBeach style={{ marginRight: '8px', color: '#007bff' }} />휴가 정보</h2>
-        <h2 className='leftdays'><FaCalendarCheck style={{ marginRight: '5px', color: '#f39c12' }} />남은 휴가 일수 :　
-        <VacationDaysBlock>{vacationDaysLeft}일</VacationDaysBlock></h2>
-        <h2 className='selecteddays'>선택된 휴가 날짜:</h2>
+        <h2>
+          <FaUmbrellaBeach style={{ marginRight: '8px', color: '#007bff' }} />
+          휴가 정보
+        </h2>
+        <h2 className="leftdays">
+          <FaCalendarCheck style={{ marginRight: '5px', color: '#f39c12' }} />
+          남은 휴가 일수 :
+          <VacationDaysBlock>{vacationDaysLeft}일</VacationDaysBlock>
+        </h2>
+        <h2 className="selecteddays">선택된 휴가 날짜:</h2>
         <DateList>
           {groupConsecutiveDates(selectedDays, holidays).map((group, idx) => (
             <DateBlock key={idx}>{`${group[0]} ~ ${group[group.length - 1]}`}</DateBlock>
@@ -179,10 +205,14 @@ const SelectForm = ({ dateRange, totalDays }) => {
               calendarType="hebrew"
               minDate={minDate}
               maxDate={maxDate}
-              tileClassName={(props) => getTileClassName({ ...props, selectedDays, holidays })}
-              onClickDay={(date) => handleDateClick(date.toLocaleDateString('ko-KR'))}
+              tileClassName={(props) =>
+                getTileClassName({ ...props, selectedDays, holidays })
+              }
+              onClickDay={handleDayClick}
               value={monthDate}
-              tileDisabled={({ date, view }) => view === 'month' && date.getMonth() !== monthDate.getMonth()}
+              tileDisabled={({ date, view }) =>
+                view === 'month' && date.getMonth() !== monthDate.getMonth()
+              }
               showNavigation={false}
             />
           </CalendarContainer>
@@ -193,4 +223,3 @@ const SelectForm = ({ dateRange, totalDays }) => {
 };
 
 export default SelectForm;
-
