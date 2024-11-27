@@ -130,19 +130,17 @@ const SelectForm = ({ dateRange, totalDays }) => {
   const navigate = useNavigate();
   const [monthRange, setMonthRange] = useState([]);
 
-  // 선택된 날짜 상태를 localStorage에서 복원
   useEffect(() => {
-    const savedSelectedDays = JSON.parse(localStorage.getItem('selectedDays')) || [];
-    const savedHolidays = JSON.parse(localStorage.getItem('holidays')) || [];
+    const savedSelectedDays = JSON.parse(sessionStorage.getItem('selectedDays')) || [];
+    const savedHolidays = JSON.parse(sessionStorage.getItem('holidays')) || [];
 
-    // 로컬 스토리지의 데이터를 useVacation 상태에 반영
     if (savedSelectedDays.length > 0) {
-      selectedDays.splice(0, selectedDays.length, ...savedSelectedDays); // 기존 배열 초기화 후 복원
+        selectedDays.splice(0, selectedDays.length, ...savedSelectedDays);
     }
     if (savedHolidays.length > 0) {
-      holidays.splice(0, holidays.length, ...savedHolidays); // 공휴일 복원
+        holidays.splice(0, holidays.length, ...savedHolidays);
     }
-  }, []);
+}, [selectedDays]);
 
   // dateRange 값이 변경될 때마다 월 범위 업데이트
   useEffect(() => {
@@ -155,12 +153,12 @@ const SelectForm = ({ dateRange, totalDays }) => {
   const minDate = startDate ? new Date(startDate) : new Date();
   const maxDate = endDate ? new Date(endDate) : null;
 
-  // 선택된 날짜를 클릭할 때 localStorage에 저장
+  // 선택된 날짜를 클릭할 때 sessionStorage에 저장
   const handleDayClick = (date) => {
     handleDateClick(date.toLocaleDateString('ko-KR'));
     const updatedDays = [...selectedDays, date.toLocaleDateString('ko-KR')];
-    localStorage.setItem('selectedDays', JSON.stringify(updatedDays));
-  };
+    sessionStorage.setItem('selectedDays', JSON.stringify(updatedDays));
+};
 
   return (
     <Container>

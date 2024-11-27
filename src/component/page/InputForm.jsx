@@ -11,12 +11,21 @@ function InputForm({ totalDays, setTotalDays, dateRange, setDateRange }) {
     const [isModalOpen, setIsModalOpen] = useState(true); // 모달 상태
     const navigate = useNavigate();
 
-    // "/"경로로 접근 시마다 로컬 스토리지 초기화
+    // "/"경로로 접근 시마다 세션 스토리지 초기화
     useEffect(() => {
-        localStorage.removeItem('selectedDays');
-        localStorage.removeItem('holidays');
-        console.log('로컬 스토리지가 초기화되었습니다.');
+        console.log('Before removing:', {
+            totalDays: sessionStorage.getItem('totalDays')
+        });
+    
+        sessionStorage.removeItem('selectedDays');
+        sessionStorage.removeItem('holidays');
+        sessionStorage.removeItem('totalDays');
+    
+        console.log('After removing:', {
+            totalDays: sessionStorage.getItem('totalDays')
+        });
     }, []);
+    
 
     useEffect(() => {
         const isTotalDaysValid = totalDays > 0;

@@ -5,7 +5,7 @@ import InputForm from './component/page/InputForm';
 import SelectForm from './component/page/SelectForm';  // SelectForm 컴포넌트 임포트
 import ResultForm from './component/page/ResultForm';
 import AdForm from './component/page/AdForm';
-import { saveToLocalStorage, loadFromLocalStorage } from "./component/list/storage";
+import { saveToSessionStorage, loadFromSessionStorage } from "./component/list/storage";
 
 const MainTitleText = styled.p`
     font-size: 24px;
@@ -25,16 +25,16 @@ function MainTitle() {
 }
 
 function App() {
-    const [totalDays, setTotalDays] = useState(loadFromLocalStorage("totalDays", ''));
-    const [dateRange, setDateRange] = useState(loadFromLocalStorage("dateRange", [null, null]));
-    const [selectedDays, setSelectedDays] = useState(loadFromLocalStorage("selectedDays", []));
-    const [holidays, setHolidays] = useState(loadFromLocalStorage("holidays", []));
+    const [totalDays, setTotalDays] = useState(loadFromSessionStorage("totalDays", ''));
+    const [dateRange, setDateRange] = useState(loadFromSessionStorage("dateRange", [null, null]));
+    const [selectedDays, setSelectedDays] = useState(loadFromSessionStorage("selectedDays", []));
+    const [holidays, setHolidays] = useState(loadFromSessionStorage("holidays", []));
 
     useEffect(() => {
-        saveToLocalStorage("totalDays", totalDays);
-        saveToLocalStorage("dateRange", dateRange);
-        saveToLocalStorage("selectedDays", selectedDays);
-        saveToLocalStorage("holidays", holidays);
+        saveToSessionStorage("totalDays", totalDays);
+        saveToSessionStorage("dateRange", dateRange);
+        saveToSessionStorage("selectedDays", selectedDays);
+        saveToSessionStorage("holidays", holidays);
     }, [totalDays, dateRange, selectedDays, holidays]);
 
 
