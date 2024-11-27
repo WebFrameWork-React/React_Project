@@ -73,6 +73,13 @@ const CalendarContainer = styled.div`
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   max-height: 400px;
   background-color: #D6F0FF;
+
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: scale(1.05); /* 크기를 1.05배 확대 */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* 그림자 효과를 강조 */
+  }
 `;
 
 const StyledButton = styled.button`
@@ -147,6 +154,13 @@ const SelectForm = ({ dateRange, totalDays }) => {
       <header className="header-container">
         {/* BackButton 컴포넌트 추가 */}
         <BackButton />
+        <style>
+            {`
+            button {
+                top: auto !important;
+            }
+            `}
+        </style>
         <h1>휴가 정보를 입력하세요</h1>
       </header>
       {/* 정보 패널 */}
