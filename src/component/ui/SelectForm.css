@@ -4,7 +4,7 @@
 
 .selected {
   color: blue !important; /* 선택된 날짜 - 파란색 */
-  background-color: #ffecb3;
+  background-color: #ffecb3 !important;
 }
 
 .holiday {

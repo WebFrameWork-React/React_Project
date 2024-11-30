@@ -27,9 +27,12 @@ export const getMonthRange = ({ start, end }) => {
 
     // 종료 날짜가 현재 목록에 포함되지 않으면 추가
     const lastMonth = new Date(endDate.getFullYear(), endDate.getMonth(), 1);
-    if (!months.some(month => month.getTime() === lastMonth.getTime())) {
-      months.push(lastMonth);
+    
+    while (date <= lastMonth) {
+      months.push(new Date(date)); // 현재 월 추가
+      date.setMonth(date.getMonth() + 1); // 다음 달로 이동
     }
+    
     return months;
   };
 
