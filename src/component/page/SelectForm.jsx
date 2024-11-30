@@ -131,8 +131,8 @@ const VacationDaysBlock = styled.div`
 `;
 
 const SelectForm = ({ dateRange, totalDays }) => {
-  const [startDate] = useState(null);
-  const [endDate] = useState(null);
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
   const { vacationDaysLeft, selectedDays, handleDateClick } = useVacation(totalDays);
   const navigate = useNavigate();
   const [monthRange, setMonthRange] = useState([]);
@@ -155,6 +155,8 @@ const SelectForm = ({ dateRange, totalDays }) => {
   // dateRange 값이 변경될 때마다 월 범위 업데이트
   useEffect(() => {
     if (dateRange?.[0] && dateRange?.[1]) {
+      setStartDate(dateRange[0]);
+      setEndDate(dateRange[1]);
       const months = getMonthRange({ start: dateRange[0], end: dateRange[1] });
       setMonthRange(months); // monthRange 업데이트
     }
