@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import UserVacationChart from '../list/UserVacation';
 import ServiceVacationChart from '../list/ServiceVacation';
@@ -20,6 +20,26 @@ function ResultForm() {
             : null;
     });
 
+    const fetchVacationPercentageData = [10, 10, 5, 3, 5, 8, 17, 20, 5, 5, 3, 10];
+    // 서버에서 서비스 이용자의 휴가 계획 비율 데이터를 가져오는 함수
+    // const fetchVacationPercentageData = async () => {
+    //     try {
+    //         const response = await fetch('https://example.com/api/vacation-percentages'); // 서버 URL 변경 필요
+    //         if (!response.ok) {
+    //             throw new Error(`HTTP error! status: ${response.status}`);
+    //         }
+    //         const data = await response.json(); // 서버로부터 월별 비율 데이터를 받음
+
+    //     } catch (err) {
+    //         console.error('서버 요청 실패:', err);
+    //         setError(err.message);
+    //         setIsLoading(false);
+    //     }
+    // };
+
+    // useEffect(() => {
+    //     fetchVacationPercentageData(); // 컴포넌트 마운트 시 데이터 가져오기
+    // }, []);
 
     const monthlyData = Array(12).fill(0); // 12개월 초기화
     vacationSummary.totalVacationPeriods.forEach((period) => {
@@ -84,7 +104,7 @@ function ResultForm() {
                         <UserVacationChart monthlyData={monthlyData} />
                     </div>
                     <div className="chart-container">
-                        <ServiceVacationChart />
+                        <ServiceVacationChart percentages={fetchVacationPercentageData} />
                     </div>
                 </div>
 
