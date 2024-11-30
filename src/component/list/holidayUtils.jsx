@@ -23,7 +23,13 @@ export const getMonthRange = ({ start, end }) => {
       months.push(new Date(date));
       date.setMonth(date.getMonth() + 1);
     }
-  
+    
+
+    // 종료 날짜가 현재 목록에 포함되지 않으면 추가
+    const lastMonth = new Date(endDate.getFullYear(), endDate.getMonth(), 1);
+    if (!months.some(month => month.getTime() === lastMonth.getTime())) {
+      months.push(lastMonth);
+    }
     return months;
   };
 
