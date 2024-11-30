@@ -37,8 +37,9 @@ function InputForm({ totalDays, setTotalDays, dateRange, setDateRange }) {
         const isTotalDaysValid = totalDays > 0;
         const isStartDateValid = dateRange?.[0] !== null;
         const isEndDateValid = dateRange?.[1] !== null;
+        const isStartEndRight = isStartDateValid && isEndDateValid && new Date(dateRange[1]) > new Date(dateRange[0]);
 
-        setIsButtonDisabled(!(isTotalDaysValid && isStartDateValid && isEndDateValid));
+        setIsButtonDisabled(!(isTotalDaysValid && isStartDateValid && isEndDateValid && isStartEndRight));
 
         if (!isTotalDaysValid) {
             setErrorMessage("총 휴가일수에 유효한 값을 입력해주세요!");
@@ -46,7 +47,10 @@ function InputForm({ totalDays, setTotalDays, dateRange, setDateRange }) {
             setErrorMessage("시작 날짜를 선택해주세요!");
         } else if (!isEndDateValid) {
             setErrorMessage("종료 날짜를 선택해주세요!");
-        } else {
+        } else if (!isStartEndRight) {
+            setErrorMessage("종료 날짜는 시작 날짜 이후여야 합니다!")
+        }
+        else {
             setErrorMessage("");
         }
     }, [totalDays, dateRange]);
