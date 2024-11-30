@@ -130,6 +130,8 @@ const VacationDaysBlock = styled.div`
   font-weight: bold;
 `;
 
+//const userId = "GPT해조"
+
 const SelectForm = ({ dateRange, totalDays }) => {
   const [startDate] = useState(null);
   const [endDate] = useState(null);
@@ -156,6 +158,38 @@ const SelectForm = ({ dateRange, totalDays }) => {
       setMonthRange(months); // monthRange 업데이트
     }
   }, [dateRange]);
+
+  // 결과 보러 가기 버튼 클릭 시 서버로 유저의 휴가 일정 값을 전송, 정상 처리 시 다음 페이지로 이동
+  const handleSubmit = async () => {
+    // const vacationData = {
+    //   userId, // 유저 아이디
+    //   vacationDaysLeft, // 남은 휴가 일수
+    //   selectedDays, // 선택된 휴가 날짜
+    //   holidays, // 공휴일
+    // };
+
+  //   try {
+  //     const response = await fetch('https://example.com/api/vacation', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify(vacationData),
+  //     });
+
+  //     if (response.ok) {
+  //       const result = await response.json();
+  //       console.log('서버 응답:', result);
+
+  //       // 성공 시 결과 페이지로 이동
+         navigate('/result', { state: { selectedDays, holidays } });
+  //     } else {
+  //       console.error('서버 요청 실패:', response.statusText);
+  //     }
+  //   } catch (error) {
+  //     console.error('서버 요청 중 에러 발생:', error);
+  //   }
+  };
 
   const minDate = startDate ? new Date(startDate) : new Date();
   const maxDate = endDate ? new Date(endDate) : null;
@@ -198,9 +232,7 @@ const SelectForm = ({ dateRange, totalDays }) => {
             <DateBlock key={idx}>{`${group[0]} ~ ${group[group.length - 1]}`}</DateBlock>
           ))}
         </DateList>
-        <StyledButton
-          onClick={() => navigate('/result', { state: { selectedDays, holidays } })}
-        >
+        <StyledButton onClick={handleSubmit}>
           결과 보러 가기
         </StyledButton>
       </InfoPanel>
