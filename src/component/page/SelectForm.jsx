@@ -168,13 +168,39 @@ const SelectForm = ({ dateRange, totalDays }) => {
     handleDateClick(date.toLocaleDateString('ko-KR'));
   };
 
-  const handleResultButtonClick = () => {
-    // 선택된 날짜를 세션스토리지에 저장
-    sessionStorage.setItem('selectedDays', JSON.stringify(selectedDays));
-    sessionStorage.setItem('holidays', JSON.stringify(holidays));
-    sessionStorage.setItem("totalDays", JSON.stringify(vacationDaysLeft))
-    // 결과 페이지로 이동
-    navigate('/result', { state: { selectedDays, holidays } });
+  // 결과 보러 가기 버튼 클릭 시 서버로 유저의 휴가 일정 값을 전송, 정상 처리 시 다음 페이지로 이동
+  const handleResultButtonClick = async () => {
+    // const vacationData = {
+    //   userId, // 유저 아이디
+    //   vacationDaysLeft, // 남은 휴가 일수
+    //   selectedDays, // 선택된 휴가 날짜
+    //   holidays, // 공휴일
+    // };
+
+    // try {
+    //   const response = await fetch('https://example.com/api/vacation', {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify(vacationData),
+    //   });
+
+    //   if (response.ok) {
+    //     const result = await response.json();
+    //     console.log('서버 응답:', result);
+
+        // 성공 시 결과 페이지로 이동
+        navigate('/result', { state: { selectedDays, holidays } });
+        sessionStorage.setItem('selectedDays', JSON.stringify(selectedDays));
+        sessionStorage.setItem('holidays', JSON.stringify(holidays));
+        sessionStorage.setItem("totalDays", JSON.stringify(vacationDaysLeft))
+    //   } else {
+    //     console.error('서버 요청 실패:', response.statusText);
+    //   }
+    // } catch (error) {
+    //   console.error('서버 요청 중 에러 발생:', error);
+    // }
   };
 
   return (
