@@ -141,13 +141,16 @@ const SelectForm = ({ dateRange, totalDays }) => {
     const savedSelectedDays = JSON.parse(sessionStorage.getItem('selectedDays')) || [];
     const savedHolidays = JSON.parse(sessionStorage.getItem('holidays')) || [];
 
+    // 중복 방지: 배열에 동일한 값을 추가하지 않도록 설정
     if (savedSelectedDays.length > 0) {
-        selectedDays.splice(0, selectedDays.length, ...savedSelectedDays);
+      const uniqueSelectedDays = Array.from(new Set([...selectedDays, ...savedSelectedDays]));
+      selectedDays.splice(0, selectedDays.length, ...uniqueSelectedDays);
     }
     if (savedHolidays.length > 0) {
-        holidays.splice(0, holidays.length, ...savedHolidays);
+      holidays.splice(0, holidays.length, ...savedHolidays);
     }
-}, [selectedDays]);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // dateRange 값이 변경될 때마다 월 범위 업데이트
   useEffect(() => {
@@ -163,9 +166,16 @@ const SelectForm = ({ dateRange, totalDays }) => {
   // 선택된 날짜를 클릭할 때 sessionStorage에 저장
   const handleDayClick = (date) => {
     handleDateClick(date.toLocaleDateString('ko-KR'));
-    const updatedDays = [...selectedDays, date.toLocaleDateString('ko-KR')];
-    sessionStorage.setItem('selectedDays', JSON.stringify(updatedDays));
-};
+  };
+
+  const handleResultButtonClick = () => {
+    // 선택된 날짜를 세션스토리지에 저장
+    sessionStorage.setItem('selectedDays', JSON.stringify(selectedDays));
+    sessionStorage.setItem('holidays', JSON.stringify(holidays));
+    sessionStorage.setItem("totalDays", JSON.stringify(vacationDaysLeft))
+    // 결과 페이지로 이동
+    navigate('/result', { state: { selectedDays, holidays } });
+  };
 
   return (
     <Container>
@@ -173,7 +183,7 @@ const SelectForm = ({ dateRange, totalDays }) => {
         {/* BackButton 컴포넌트 추가 */}
         <BackButton />
         <style>
-            {`
+          {`
             button {
                 top: auto !important;
             }
@@ -199,7 +209,7 @@ const SelectForm = ({ dateRange, totalDays }) => {
           ))}
         </DateList>
         <StyledButton
-          onClick={() => navigate('/result', { state: { selectedDays, holidays } })}
+          onClick={handleResultButtonClick}
         >
           결과 보러 가기
         </StyledButton>
