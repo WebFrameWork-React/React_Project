@@ -5,26 +5,32 @@ import PickDateItem from "../list/PickDate";
 import TotalDate from "../list/TotalDate";
 import WelcomeModal from "../list/WelcomeModal"; // 새로 추가된 컴포넌트 경로
 
+
 function InputForm({ totalDays, setTotalDays, dateRange, setDateRange }) {
     const [isButtonDisabled, setIsButtonDisabled] = useState(true);
     const [errorMessage, setErrorMessage] = useState("");
     const [isModalOpen, setIsModalOpen] = useState(true); // 모달 상태
     const navigate = useNavigate();
 
-    // "/"경로로 접근 시마다 세션 스토리지 초기화
-    useEffect(() => {
-        console.log('Before removing:', {
-            totalDays: sessionStorage.getItem('totalDays')
-        });
+    sessionStorage.removeItem('selectedDays');
+    sessionStorage.removeItem('holidays');
+    sessionStorage.removeItem('totalDays');
+
+
+    // // "/"경로로 접근 시마다 세션 스토리지 초기화
+    // useEffect(() => {
+    //     console.log('Before removing:', {
+    //         totalDays: sessionStorage.getItem('totalDays')
+    //     });
     
-        sessionStorage.removeItem('selectedDays');
-        sessionStorage.removeItem('holidays');
-        sessionStorage.removeItem('totalDays');
+    //     sessionStorage.removeItem('selectedDays');
+    //     sessionStorage.removeItem('holidays');
+    //     sessionStorage.removeItem('totalDays');
     
-        console.log('After removing:', {
-            totalDays: sessionStorage.getItem('totalDays')
-        });
-    }, []);
+    //     console.log('After removing:', {
+    //         totalDays: sessionStorage.getItem('totalDays')
+    //     });
+    // }, []);
     
 
     useEffect(() => {
