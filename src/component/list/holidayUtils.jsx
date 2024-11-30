@@ -16,6 +16,8 @@ export const getMonthRange = ({ start, end }) => {
     const endDate = new Date(end);
     const months = [];
     const date = new Date(startDate);
+
+    date.setDate(1);
   
     while (date <= endDate) {
       months.push(new Date(date));
