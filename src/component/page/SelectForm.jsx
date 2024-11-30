@@ -259,6 +259,8 @@ const SelectForm = ({ dateRange, totalDays }) => {
         >
           결과 보러 가기
         </StyledButton>
+        <div>　</div>
+        <div className='wise-saying'> "휴식은 일의 절반이다."<br></br>-Leonardo da Vinci-</div>
       </InfoPanel>
 
       {/* 달력 그리드 */}
