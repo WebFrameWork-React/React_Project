@@ -53,14 +53,14 @@ const CalendarHeader = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #ffecb3; /* 배경색 */
+  background-color: white; /* 배경색 */
   color: #333; /* 텍스트 색상 */
   padding: 10px 20px;
   border-radius: 20px;
   font-size: 16px;
   font-weight: 600;
   margin-bottom: 10px; /* 달력과 간격 */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
   max-width: fit-content;
   margin-left: auto;
   margin-right: auto;
@@ -72,7 +72,7 @@ const CalendarContainer = styled.div`
   padding: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   max-height: 400px;
-  background-color: #D6F0FF;
+  background-color: #f9f9f9;
 
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 
@@ -103,13 +103,13 @@ const StyledButton = styled.button`
 
 const DateBlock = styled.div`
   display: inline-block;
-  background-color: #ffecb3;
-  color: #333;
+  background-color: white; /* 노랑 배경이였던것 */
+  color: black;
   padding: 8px 12px;
   margin: 5px;
   border-radius: 12px;
   font-size: 14px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
 `;
 
 const DateList = styled.div`
@@ -120,13 +120,13 @@ const DateList = styled.div`
 
 const VacationDaysBlock = styled.div`
   display: inline-block;
-  background-color: #ffecb3; /* 밝은 노란색 배경 */
-  color: #333;
+  background-color: white; /* 노랑 배경이였던 것 */
+  color: black;
   padding: 8px 12px;
   margin: 5px 0;
   border-radius: 12px;
   font-size: 14px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
   font-weight: bold;
 `;
 

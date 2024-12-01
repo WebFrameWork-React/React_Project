@@ -3,8 +3,7 @@
 }
 
 .selected {
-  color: blue !important; /* 선택된 날짜 - 파란색 */
-  background-color: #ffecb3 !important;
+  color: rgb(0, 140, 255) !important; /* 선택된 날짜 - 파란색 */
 }
 
 .holiday {
@@ -27,8 +26,8 @@
 .react-calendar {
   border-radius: 8px; /* 전체 달력의 테두리를 둥글게 */
   overflow: hidden; /* 둥근 모서리를 잘리게 만듦 */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  border-color: skyblue;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  border-color: #ccc;
 }
 .react-calendar__month-view__weekdays__weekday abbr {
   text-decoration: none; /* 점 제거 */
