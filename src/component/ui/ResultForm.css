@@ -63,3 +63,38 @@
     margin-bottom: 10px; /* 아래 여백 */
     width: 100%; /* 부모 요소의 너비를 모두 사용 */
 }
+
+.app-header {
+    padding: 40px; /* 여백 추가 */
+    text-align: center; /* 텍스트 중앙 정렬 */
+    border-bottom: 1px solid #ddd; /* 하단에 선 추가 */
+}
+
+.app-header h1 {
+    margin: 0;
+    font-size: 40px; /* 제목 크기 */
+    font-weight: bold;
+    color: #333; /* 텍스트 색상 */
+    flex: 1;
+    text-align: center;
+}
+
+.app-header button {
+    background-color: #007BFF;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    transform: translateY(80%); /* 수직 중앙에서 살짝 아래로 */
+    left: 20px;
+}
+
+.app-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}

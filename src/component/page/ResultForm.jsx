@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+//import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import UserVacationChart from '../list/UserVacation';
 import ServiceVacationChart from '../list/ServiceVacation';
@@ -13,12 +14,6 @@ function ResultForm() {
     const { selectedDays, holidays } = location.state || {};
 
     const vacationSummary = calculateVacationSummary(selectedDays, holidays);
-
-    const [selectedMonth, setSelectedMonth] = useState(() => {
-        return vacationSummary.totalVacationPeriods.length > 0
-            ? vacationSummary.totalVacationPeriods[0].months[0]
-            : null;
-    });
 
     const fetchVacationPercentageData = [10, 10, 5, 3, 5, 8, 17, 20, 5, 5, 3, 10];
     // 서버에서 서비스 이용자의 휴가 계획 비율 데이터를 가져오는 함수
@@ -46,6 +41,15 @@ function ResultForm() {
         period.months.forEach((month) => {
             monthlyData[month - 1] += period.usedVacationDays; // 월별로 휴가 일수 합산
         });
+    });
+
+    const maxVacationMonth = monthlyData.indexOf(Math.max(...monthlyData)) + 1;
+
+    const [selectedMonth, setSelectedMonth] = useState(() => {
+        if (vacationSummary.totalVacationPeriods.length > 0) {
+            return maxVacationMonth; // 가장 많은 휴가가 사용된 달로 설정
+        }
+        return null;
     });
 
     const handleVacationDateClick = (month) => {

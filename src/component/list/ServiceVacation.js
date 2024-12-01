@@ -37,7 +37,7 @@ const ServiceVacationChart = ({percentages}) => {
 
     return (
         <>
-            <h2>서비스 이용자들의 휴가 계획 현황</h2>
+            <h3>서비스 이용자들의 휴가 계획 현황</h3>
             <div className="chart-container">
                 <BarChart data={barData} options={options} />
             </div>

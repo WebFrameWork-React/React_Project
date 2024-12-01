@@ -38,7 +38,7 @@ const UserVacationChart = ({ monthlyData }) => {
 
     return (
         <>
-            <h2>현 사용자의 휴가 계산 결과</h2>
+            <h3>현 사용자의 휴가 계산 결과</h3>
             <div className="chart-container">
                 <DoughnutChart data={doughnutData} options={options} />
             </div>
