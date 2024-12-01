@@ -167,7 +167,23 @@ const SelectForm = ({ dateRange, totalDays }) => {
 
   // 선택된 날짜를 클릭할 때 sessionStorage에 저장
   const handleDayClick = (date) => {
-    handleDateClick(date.toLocaleDateString('ko-KR'));
+
+    const formattedDate = date.toLocaleDateString("ko-KR");
+
+  // 이미 선택된 날짜를 클릭한 경우 (선택 해제)
+  if (selectedDays.includes(formattedDate)) {
+    handleDateClick(formattedDate); // 선택 해제
+    return;
+  }
+
+  // 휴가 일수가 0일인 경우 (새로운 날짜 선택 방지)
+  if (vacationDaysLeft <= 0) {
+    alert("휴가 일수를 모두 소진했습니다!");
+    return;
+  }
+
+  // 새로운 날짜 선택
+  handleDateClick(formattedDate);
   };
 
   // 결과 보러 가기 버튼 클릭 시 서버로 유저의 휴가 일정 값을 전송, 정상 처리 시 다음 페이지로 이동
@@ -217,7 +233,9 @@ const SelectForm = ({ dateRange, totalDays }) => {
             }
             `}
         </style>
-        <h1>휴가 정보를 입력하세요</h1>
+        <h1><FaUmbrellaBeach style={{ marginRight: '8px', color: '#007bff' }} />　휴가 정보를 입력하세요　
+        <FaUmbrellaBeach style={{ marginRight: '8px', color: '#007bff' }} />
+        </h1>
       </header>
       {/* 정보 패널 */}
       <InfoPanel>
@@ -241,6 +259,8 @@ const SelectForm = ({ dateRange, totalDays }) => {
         >
           결과 보러 가기
         </StyledButton>
+        <div>　</div>
+        <div className='wise-saying'> "휴식은 일의 절반이다."<br></br>-Leonardo da Vinci-</div>
       </InfoPanel>
 
       {/* 달력 그리드 */}
