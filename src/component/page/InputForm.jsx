@@ -3,13 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { Button, Alert, Paper } from "@mui/material";
 import PickDateItem from "../list/PickDate";
 import TotalDate from "../list/TotalDate";
-import WelcomeModal from "../list/WelcomeModal"; // 새로 추가된 컴포넌트 경로
 
 
 function InputForm({ totalDays, setTotalDays, dateRange, setDateRange }) {
     const [isButtonDisabled, setIsButtonDisabled] = useState(true);
     const [errorMessage, setErrorMessage] = useState("");
-    const [isModalOpen, setIsModalOpen] = useState(true); // 모달 상태
     const navigate = useNavigate();
 
     sessionStorage.removeItem('selectedDays');
@@ -63,9 +61,6 @@ function InputForm({ totalDays, setTotalDays, dateRange, setDateRange }) {
 
     return (
         <>
-            {/* 모달 컴포넌트 */}
-            <WelcomeModal open={isModalOpen} onClose={() => setIsModalOpen(false)} />
-
             {/* 본 페이지 */}
             <Paper
                 elevation={6}
