@@ -2,7 +2,7 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendar } from '@fortawesome/free-solid-svg-icons';
 
-function VacationDate({ date, usedDays, totalDays, onClick }) {
+function VacationDate({ date, usedDays, totalDays, onClick, isSelected }) {
   const styles = {
     holiday: {
       backgroundColor: '#ffffff', // 카드 배경색
@@ -29,12 +29,13 @@ function VacationDate({ date, usedDays, totalDays, onClick }) {
       width: '50px', // 아이콘 영역 너비
       height: '50px', // 아이콘 영역 높이
       marginRight: '15px', // 아이콘과 텍스트 간 간격
-      backgroundColor: '#eaf4ff', // 배경색
+      backgroundColor: isSelected ? '#007BFF' : '#eaf4ff', // 선택된 상태에 따라 색상 변경
       borderRadius: '8px', // 아이콘 배경 둥글게
+      transition: 'background-color 0.2s', // 색상 변경 애니메이션
     },
     icon: {
       fontSize: '20px',
-      color: '#007BFF', // 아이콘 색상
+      color: isSelected ? '#eaf4ff' : '#007BFF', // 선택된 상태에 따라 아이콘 색상 변경
     },
     textContainer: {
       display: 'flex',
@@ -81,7 +82,6 @@ function VacationDate({ date, usedDays, totalDays, onClick }) {
       onMouseLeave={() => setIsHovered(false)}
       onClick={onClick}
     >
-
       {/* 아이콘 컨테이너 */}
       <div style={styles.iconContainer}>
         <FontAwesomeIcon icon={faCalendar} style={styles.icon} />

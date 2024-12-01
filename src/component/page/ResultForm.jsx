@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-//import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import UserVacationChart from '../list/UserVacation';
 import ServiceVacationChart from '../list/ServiceVacation';
@@ -46,16 +45,18 @@ function ResultForm() {
     const maxVacationMonth = monthlyData.indexOf(Math.max(...monthlyData)) + 1;
 
     const [selectedMonth, setSelectedMonth] = useState(() => {
-        if (vacationSummary.totalVacationPeriods.length > 0) {
-            return maxVacationMonth; // 가장 많은 휴가가 사용된 달로 설정
-        }
-        return null;
+        const storedMonth = sessionStorage.getItem('selectedMonth');
+        return storedMonth ? parseInt(storedMonth, 10) : maxVacationMonth;
     });
+
+    useEffect(() => {
+        // 선택된 달 값을 localStorage에 저장
+        sessionStorage.setItem('selectedMonth', selectedMonth);
+    }, [selectedMonth]);
 
     const handleVacationDateClick = (month) => {
         setSelectedMonth(month); // 클릭된 월 상태 업데이트
     };
-
 
     const getAdCardUrl = (region) => `/ad?region=${region}&month=${selectedMonth || ''}`;
 
@@ -76,7 +77,8 @@ function ResultForm() {
                                 date={`${period.startDate} ~ ${period.endDate}`}
                                 totalDays={period.totalDays}
                                 usedDays={period.usedVacationDays}
-                                onClick={() => handleVacationDateClick(period.months[0])} // 첫 번째 월 전달
+                                onClick={() => handleVacationDateClick(period.months[0])}
+                                isSelected={selectedMonth === period.months[0]}
                             />
                         ))}
                     </div>
