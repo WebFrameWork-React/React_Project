@@ -6,129 +6,8 @@ import useVacation from '../list/useVacation';
 import { getTileClassName, getMonthRange, groupConsecutiveDates } from '../list/holidayUtils';
 import holidays from '../list/HolidayList';
 import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
 import { FaCalendarCheck, FaUmbrellaBeach } from 'react-icons/fa';
 import BackButton from '../list/BackButton';
-
-// 스타일 컴포넌트 정의
-
-const Container = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  padding: 20px;
-`;
-
-const InfoPanel = styled.div`
-  flex: 1;
-  position: sticky;
-  top: 20px;
-  align-self: flex-start;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  background-color: #f9f9f9;
-  min-width: 265px;
-  max-width: 300px;
-`;
-
-const CalendarGrid = styled.div`
-  flex: 2;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  max-width : 100px;
-   
-  @media (max-width: 1200px) {
-    grid-template-columns: repeat(2, 1fr); /* 한 줄에 2개의 열 */
-  }
-
-  @media (max-width: 800px) {
-    grid-template-columns: repeat(1, 1fr); /* 한 줄에 1개의 열 */
-  }
-`;
-
-const CalendarHeader = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: white; /* 배경색 */
-  color: #333; /* 텍스트 색상 */
-  padding: 10px 20px;
-  border-radius: 20px;
-  font-size: 16px;
-  font-weight: 600;
-  margin-bottom: 10px; /* 달력과 간격 */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
-  max-width: fit-content;
-  margin-left: auto;
-  margin-right: auto;
-`;
-
-const CalendarContainer = styled.div`
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  max-height: 400px;
-  background-color: #f9f9f9;
-
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-
-  &:hover {
-    transform: scale(1.05); /* 크기를 1.05배 확대 */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* 그림자 효과를 강조 */
-  }
-`;
-
-const StyledButton = styled.button`
-  margin-top: 20px;
-  padding: 10px 20px;
-  background-color: #4D9ED8;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px;
-
-  transition: transform 0.3s, box-shadow 0.3s;
-
-  &:hover {
-    background-color: #5BB8E6;
-    transform: scale(1.02);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-  }
-`;
-
-const DateBlock = styled.div`
-  display: inline-block;
-  background-color: white; /* 노랑 배경이였던것 */
-  color: black;
-  padding: 8px 12px;
-  margin: 5px;
-  border-radius: 12px;
-  font-size: 14px;
-  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
-`;
-
-const DateList = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-`;
-
-const VacationDaysBlock = styled.div`
-  display: inline-block;
-  background-color: white; /* 노랑 배경이였던 것 */
-  color: black;
-  padding: 8px 12px;
-  margin: 5px 0;
-  border-radius: 12px;
-  font-size: 14px;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-  font-weight: bold;
-`;
 
 const SelectForm = ({ dateRange, totalDays }) => {
   const [startDate, setStartDate] = useState(null);
@@ -222,23 +101,22 @@ const SelectForm = ({ dateRange, totalDays }) => {
   };
 
   return (
-    <Container>
+    <div className="container">
       <header className="header-container">
-        {/* BackButton 컴포넌트 추가 */}
         <BackButton />
         <style>
           {`
             button {
                 top: auto !important;
             }
-            `}
+          `}
         </style>
-        <h1><FaUmbrellaBeach style={{ marginRight: '8px', color: '#007bff' }} />　휴가 정보를 입력하세요　
-        <FaUmbrellaBeach style={{ marginRight: '8px', color: '#007bff' }} />
+        <h1>
+          <FaUmbrellaBeach style={{ marginRight: '8px', color: '#007bff' }} />　휴가 정보를 입력하세요　
+          <FaUmbrellaBeach style={{ marginRight: '8px', color: '#007bff' }} />
         </h1>
       </header>
-      {/* 정보 패널 */}
-      <InfoPanel>
+      <div className="info-panel">
         <h2>
           <FaUmbrellaBeach style={{ marginRight: '8px', color: '#007bff' }} />
           휴가 정보
@@ -246,30 +124,28 @@ const SelectForm = ({ dateRange, totalDays }) => {
         <h2 className="leftdays">
           <FaCalendarCheck style={{ marginRight: '5px', color: '#f39c12' }} />
           남은 휴가 일수 :
-          <VacationDaysBlock>{vacationDaysLeft}일</VacationDaysBlock>
+          <span className="vacation-days-block">{vacationDaysLeft}일</span>
         </h2>
         <h2 className="selecteddays">선택된 휴가 날짜:</h2>
-        <DateList>
+        <div className="date-list">
           {groupConsecutiveDates(selectedDays, holidays).map((group, idx) => (
-            <DateBlock key={idx}>{`${group[0]} ~ ${group[group.length - 1]}`}</DateBlock>
+            <span className="date-block" key={idx}>{`${group[0]} ~ ${group[group.length - 1]}`}</span>
           ))}
-        </DateList>
-        <StyledButton
-          onClick={handleResultButtonClick}
-        >
+        </div>
+        <button className="styled-button" onClick={handleResultButtonClick}>
           결과 보러 가기
-        </StyledButton>
+        </button>
         <div>　</div>
-        <div className='wise-saying'> "휴식은 일의 절반이다."<br></br>-Leonardo da Vinci-</div>
-      </InfoPanel>
-
-      {/* 달력 그리드 */}
-      <CalendarGrid>
+        <div className="wise-saying">
+          "휴식은 일의 절반이다."<br />-Leonardo da Vinci-
+        </div>
+      </div>
+      <div className="calendar-grid">
         {monthRange.map((monthDate, index) => (
-          <CalendarContainer key={index}>
-            <CalendarHeader>
+          <div className="calendar-container" key={index}>
+            <div className="calendar-header">
               {monthDate.toLocaleString('ko-KR', { year: 'numeric', month: 'long' })}
-            </CalendarHeader>
+            </div>
             <Calendar
               locale="ko-KR"
               calendarType="hebrew"
@@ -285,10 +161,10 @@ const SelectForm = ({ dateRange, totalDays }) => {
               }
               showNavigation={false}
             />
-          </CalendarContainer>
+          </div>
         ))}
-      </CalendarGrid>
-    </Container>
+      </div>
+    </div>
   );
 };
 
