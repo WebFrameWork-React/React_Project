@@ -1,74 +1,37 @@
-<<<<<<< HEAD
-# Getting Started with Create React App
+# Vacation Planner Project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 프로젝트 개요
+이 프로젝트는 사용자가 총 휴가 일수와 휴가 시작 및 종료 날짜를 입력하고, 해당 정보를 바탕으로 효율적으로 휴가를 계획할 수 있도록 돕는 **휴가 계획 관리 시스템**입니다.  
+휴가 소모일과 연속된 휴일(주말, 공휴일 포함)을 묶어 보여주고, 해당 월에 맞는 여행 추천 리스트도 제공하여 휴가 계획을 최적화할 수 있습니다.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 주요 기능
+1. **휴가 정보 입력**  
+   - 총 휴가 일수 입력  
+   - 휴가 시작 날짜와 종료 날짜 설정
 
-### `npm start`
+2. **휴가 달력 관리**  
+   - 달력 화면에서 휴가 소모 날짜를 클릭하여 선택  
+   - 선택된 날짜와 연속된 주말, 공휴일을 자동으로 그룹화  
+   - 선택한 날짜 리스트 실시간 업데이트 및 표시
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+3. **결과 페이지**  
+   - 선택한 휴가 날짜와 연속된 휴일 리스트 확인  
+   - 해당 월에 적합한 여행 추천 리스트 제공
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## 실행 방법
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 1. 프로젝트 초기화
+```bash
+npm install
+```
 
-### `npm run build`
+### 2. 프로젝트 실행
+```bash
+npm start
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-=======
-# React_Project
->>>>>>> 1855d3a7e7f1c9c5a2b4dea9ed936bbf5a7cd60f
