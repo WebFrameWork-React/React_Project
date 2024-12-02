@@ -24,7 +24,7 @@ function App() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<StartForm />} /> {/* StartForm을 기본 경로에 추가 */}
+                <Route path="/" element={<StartForm />} />
                 <Route
                     path="/input"
                     element={
