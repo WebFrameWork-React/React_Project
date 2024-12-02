@@ -1,9 +1,8 @@
-// ScrollSection.jsx
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import ImageList from './ImageList' ;
-import ScrollHint from './ScrollHint'; // Import ScrollHint
+import ImageList from './ImageList';
+import ScrollHint from './ScrollHint';
 
 const ScrollSection = ({ title, description, images, isLastSection }) => {
   const { ref, inView } = useInView({
@@ -18,20 +17,21 @@ const ScrollSection = ({ title, description, images, isLastSection }) => {
         scrollSnapAlign: 'start',
         scrollSnapStop: 'always',
         display: 'flex',
+        flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        flexDirection: 'column',
+        position: 'relative',
       }}
     >
       {title === '나만의 휴가 일정 계획하기' && (
         <div style={{
           position: 'absolute',
-          top: '20px',
-          left: '20px',
-          zIndex: 1,
+          top: '105px', 
+          left: '370px',
+          zIndex: 10,
         }}>
           <img src="/images/tree.png" alt="Tree" style={{
-            width: '50px',
+            width: '100px',
             height: 'auto',
           }} />
         </div>
@@ -63,8 +63,8 @@ const ScrollSection = ({ title, description, images, isLastSection }) => {
       >
         {description}
       </motion.p>
-      <ImageList images={images} title={title} /> {/* Use ImageList */}
-      <ScrollHint isLastSection={isLastSection} /> {/* Use ScrollHint */}
+      <ImageList images={images} title={title} />
+      <ScrollHint isLastSection={isLastSection} />
     </div>
   );
 };

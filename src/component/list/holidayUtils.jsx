@@ -126,10 +126,6 @@ export const calculateVacationSummary = (selectedDays, holidays) => {
     // 가장 많은 날짜가 포함된 월 찾기
     const dominantMonth = Object.entries(monthCounts)
       .sort((a, b) => b[1] - a[1])[0][0]; // 날짜 개수 기준 내림차순 정렬 후 첫 번째 월 선택
-
-
-
-
     
     // 연휴 기간 내에서 사용된 휴가일만 계산
     const usedVacationDaysInGroup = group.filter(date => selectedDays.includes(date)).length;

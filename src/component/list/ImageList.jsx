@@ -17,11 +17,11 @@ const ImageList = ({ images, title }) => {
           width = '40%';
           maxWidth = '300px';
         } else if (image.includes('2.png') || image.includes('3.png') || image.includes('4.png')) {
-          width = '120%';  
-          maxWidth = '1200px'; 
+          width = '115%';  
+          maxWidth = '1150px'; 
         } else {
-          width = '80%';
-          maxWidth = '750px';
+          width = '75%';
+          maxWidth = '700px';
         }
 
         return (
