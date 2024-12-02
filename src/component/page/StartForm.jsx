@@ -1,7 +1,6 @@
-// StartForm.jsx
 import React, { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import ScrollSection from '../list/ScrollSection'; // 경로 수정
+import ScrollSection from '../list/ScrollSection';
 
 const sections = [
   {
