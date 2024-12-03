@@ -1,3 +1,21 @@
+## 실행 방법
+
+### 필요 시 하위 경로로 이동
+```bash
+cd React-Project_main
+```
+
+### 1. 프로젝트 초기화
+```bash
+npm install
+```
+
+### 2. 프로젝트 실행
+```bash
+npm start
+```
+
+
 # Vacation Planner Project
 
 ## 프로젝트 개요
@@ -23,17 +41,5 @@
    - 해당 월에 적합한 여행 추천 리스트 제공
 
 ---
-
-## 실행 방법
-
-### 1. 프로젝트 초기화
-```bash
-npm install
-```
-
-### 2. 프로젝트 실행
-```bash
-npm start
-```
 
 
